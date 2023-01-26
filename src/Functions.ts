@@ -1,3 +1,5 @@
+
+
 const calcDistance = (distance: number): number => {
   let baseFee = 2
   let additionalFee = 0
@@ -14,7 +16,14 @@ const calcCart = (cartValue: number) => {
 };
 
 const calcItem = (items: number) => {
-  return items >= 5 ? (items - 4) * 0.5 : 0;
+  let surcharge = 0
+  if (items >=5){
+    surcharge +=0.5 * (items -4)
+  }
+  if (items > 12){
+    surcharge += 1.2
+  }
+  return surcharge
 };
 
 const calcRushTime = (datetime: string) => {
@@ -34,7 +43,7 @@ export const calculate = (
   cartValue: number,
   distance: number,
   items: number,
-  datetime: string
+  datetime: string,
 ) => {
   const distanceSurcharge = calcDistance(distance);
   const cartSurcharge = calcCart(cartValue);
@@ -46,8 +55,12 @@ export const calculate = (
   const deliveryCharge =
     cartValue >= 100
       ? cartValue
-      : calculateDeliveryCharge > 15
+      : calculateDeliveryCharge >= 15
       ? 15
       : (distanceSurcharge + cartSurcharge + itemCharge) * fridayRushCheck;
   return deliveryCharge.toFixed(2);
 };
+function setTotal(surcharge: number) {
+  throw new Error("Function not implemented.");
+}
+
