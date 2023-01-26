@@ -1,7 +1,5 @@
 import { useState } from "react";
-
 import { calculate } from "./Functions";
-
 import "./styles.css";
 
 type InputValuesType = {
